@@ -14,37 +14,50 @@ class RandomEnglishWords extends StatefulWidget {
 
 //State
 class RandomEnglishWordsState extends State<RandomEnglishWords> {
+  final _words = <WordPair>[];
+  final _checkedWords = new Set<WordPair>(); // Set contains "giống mảng nhưng k có phần tử trùng nhau"
   @override
   Widget build(BuildContext context) {
     // TODO: implement createState
     // final wordPair = new WordPair.random();
-    final _words = <WordPair>[];
-    // return new Text(
-    //   wordPair.asUpperCase,
-    //   style: new TextStyle(fontSize: 22.0),
-    // );
 
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('List of english words'),
       ),
-      body: new ListView.builder(itemBuilder: (context,index){
-
-        if(index >= _words.length){
+      body: new ListView.builder(itemBuilder: (context, index) {
+        if (index >= _words.length) {
           _words.addAll(generateWordPairs().take(10));
         }
-         return _buildRow(_words[index]);
+        return _buildRow(_words[index], index);
       }),
     );
   }
-}
-Widget _buildRow(WordPair wordPair){
-  return new ListTile(
-    title: new Text(
-      wordPair.asUpperCase,
-      style: new TextStyle(fontSize: 18.0,color: Colors.red),
+
+  Widget _buildRow(WordPair wordPair, int index) {
+    final color = index % 2 == 0 ? Colors.red : Colors.blue;
+    final isChecked= _checkedWords.contains(wordPair);
+    return new ListTile(
+      //leading =left, trailing = right. 
+      leading: new Icon(
+        isChecked ? Icons.check_box : Icons.check_box_outline_blank,
+        color: color,
+        ),
+      title: new Text(
+        wordPair.asUpperCase,
+        style: new TextStyle(fontSize: 18.0, color: color),
       ),
-  );
+      onTap: (){ // giống onclick
+        setState(() {
+                  if(isChecked){
+                    _checkedWords.remove(wordPair);
+                  } else {
+                    _checkedWords.add(wordPair);
+                  }
+                });
+      },
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
