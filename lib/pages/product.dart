@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage1 extends StatelessWidget {  
-  MyHomePage1({Key key, this.title}) : super(key: key);  
+class ProductPage extends StatelessWidget {  
+  ProductPage({Key key, this.title}) : super(key: key);  
   final String title;  
   
   @override  

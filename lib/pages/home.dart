@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/product.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -56,8 +57,9 @@ class _MyAppState extends State<MyHomePage> {
             padding: EdgeInsets.all(16),
             child: Row(
               children: [
-                Image.network(
-                    "https://raw.githubusercontent.com/o7planning/rs/master/flutter/fast_food.png"),
+                // Image.network(
+                //     "https://raw.githubusercontent.com/o7planning/rs/master/flutter/fast_food.png"),
+                Image.asset("images/dandelion.jpg"),
                 SizedBox(width: 10),
                 Column(
                   children: [
@@ -82,6 +84,8 @@ class _MyAppState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ProductPage()));
           setState(() {
             this._count++;
           });
